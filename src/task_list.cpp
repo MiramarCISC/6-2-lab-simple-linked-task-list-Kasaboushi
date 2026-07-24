@@ -94,12 +94,16 @@ int removeCompletedTasks(TaskNode*& head) {
     // Remove all completed tasks.
     // Return the number of removed nodes.
     // Be sure to handle completed tasks at the head of the list.
+
+    // DOES NOT WORK
     int count = 0;
-    while (head->next != nullptr) {
+    while (head != nullptr) {
         if (head->data.completed == true) {
-            head = nullptr;
+            delete head;
+            count ++;
         }
-        head = head-> next;
+        head = head->next;
+        
     }
     return count;
 }
