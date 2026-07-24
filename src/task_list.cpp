@@ -47,6 +47,7 @@ void insertFront(TaskNode*& head, Task task) {
     TaskNode* node = new TaskNode; //Make a new node
     node->data = task; // and set the variables
     node->next = head;
+    head = node;
     
 }
 

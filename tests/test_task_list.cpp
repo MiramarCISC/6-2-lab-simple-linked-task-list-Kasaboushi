@@ -101,13 +101,13 @@ void testClearEmptyAndNonEmpty() {
 }
 
 int main() {
-    testIsValidPriority();
-    testCreateTask();
-    testInsertFrontAndCount();
-    testFindTask();
-    testMarkTaskComplete();
-    testRemoveCompletedTasks();
-    testClearEmptyAndNonEmpty();
+    testIsValidPriority(); //good
+    testCreateTask(); // good
+    testInsertFrontAndCount(); // bad
+    testFindTask(); // bad
+    testMarkTaskComplete(); // bad
+    testRemoveCompletedTasks(); // bad
+    testClearEmptyAndNonEmpty(); // bad
 
     cout << "All Lab 6.2 linked task list tests passed!" << endl;
     return 0;
