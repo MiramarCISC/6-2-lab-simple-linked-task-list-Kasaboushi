@@ -42,8 +42,6 @@ void insertFront(TaskNode*& head, Task task) {
     // add the info
     // set the next
 
-    //TaskNode head->data = &task;
-
     TaskNode* node = new TaskNode; //Make a new node
     node->data = task; // and set the variables
     node->next = head;
@@ -112,10 +110,15 @@ void clearTasks(TaskNode*& head) {
     // TODO:
     // Delete every node in the list.
     // Set head to nullptr.
-    while (head != nullptr) {
-        head = nullptr;
-        head = head->next;
-    }
+
+    // while (head != nullptr) {
+    //     head = nullptr;
+    //     head = head->next;
+    // }
+
+    // Need to loop until nothing left: So, while the next one exists, delete the next, then set head to nullptr.
+    
+    head = nullptr;
 }
 
 void printTask(const Task& task) {
