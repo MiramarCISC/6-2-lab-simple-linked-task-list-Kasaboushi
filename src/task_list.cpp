@@ -80,8 +80,9 @@ bool markTaskComplete(TaskNode* head, string description) {
     // If found, set completed to true and return true.
     // Otherwise return false.
     
+    //Does not work; only tags first one
     if (findTask(head, description) != nullptr) {
-        head -> data.completed = true;
+        findTask(head,description) -> data.completed = true;
         return true;
     }
     return false;
@@ -93,16 +94,83 @@ int removeCompletedTasks(TaskNode*& head) {
     // Return the number of removed nodes.
     // Be sure to handle completed tasks at the head of the list.
 
-    // DOES NOT WORK
-    int count = 0;
-    while (head != nullptr) {
-        if (head->data.completed == true) {
-            delete head;
-            count ++;
-        }
-        head = head->next;
+        // // two pointers, current and previous
+        // // continue while current is not null
+        // // count whenever current = completed
+        // // if previous is null, shift head, delete it
+        // int count = 0;
+        // TaskNode* previous = head;
+        // // TaskNode* nextNode = head->next;
+        // while (previous != nullptr) {
+        //     // TaskNode* nextNode = previous->next;
+        //     // if (previous->data.completed == true) {
+        //     //     count ++;
+        //     //     delete previous;
+        //     // }
+        //     // cout << previous->data.description;
+        //     // cout << "\n";
+        //     // TaskNode* nextNode = previous->next;
+        //     // if (nextNode != nullptr) {
+        //     //     cout << "next is" << nextNode->data.description << "***";
+        //     //     cout << "\n";
+        //     //     previous-
+
+        //     }
+        // int count = 0;
+        // TaskNode* trail = head;
+        // TaskNode* newHead = nullptr;
+        // TaskNode* movingHead = head;
+        // while (movingHead != nullptr) {
+            
+        //     if (movingHead->data.completed == true) {
+        //         cout << "deleting " << trail->data.description; 
+        //         movingHead = movingHead->next;
+        //         count ++;
+        //         delete trail;
+        //     }
+        //     else {
+        //         movingHead = movingHead->next;
+        //     }
+        //     trail = movingHead;
+        //     // movingHead = movingHead->next;
+        //     if (newHead == nullptr) {
+        //         newHead = movingHead;
+        //     }
+            
+        // }
         
-    }
+        // head = newHead;
+        
+        // return count;
+        TaskNode* previous = nullptr;
+        TaskNode* current = head;
+        int count = 0;
+        //if it's completed
+        //     check if previous is null
+        //         if yes, move head forward after deleting what used to be head; make another pointer and cut
+        //         otherwise
+        //         if no, relink; set previous next to current and then delete.
+        // else move on and set previous to current, current to next
+
+        while (current != nullptr) {
+            if (current->data.completed) {
+                TaskNode* temp = current;
+                if (previous == nullptr) {
+                    head = current->next;
+                    current = head;
+                }
+                else {
+                    previous->next = current-> next;
+                    current = current->next;
+                }
+                delete temp;
+                count ++;
+            }
+            else {
+                previous = current;
+                current = current->next;
+            }
+        }
     return count;
 }
 
@@ -117,7 +185,13 @@ void clearTasks(TaskNode*& head) {
     // }
 
     // Need to loop until nothing left: So, while the next one exists, delete the next, then set head to nullptr.
-    
+    // Or, save the next one ahead of time, and delete the current
+    while (head != nullptr) {
+        TaskNode* node = new TaskNode;
+        node = head->next;
+        delete head;
+        head = node;
+    }
     head = nullptr;
 }
 
